@@ -1,0 +1,113 @@
+.mega-header-admin {
+	max-width: 900px;
+}
+.mega-header-admin .mh-card {
+	background: #fff;
+	padding: 20px;
+	margin-top: 20px;
+	border: 1px solid #ccd0d4;
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+.mega-header-admin .mh-image-upload {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+.mega-header-admin .mh-menu-item {
+	background: #f9f9f9;
+	border: 1px solid #ddd;
+	margin-bottom: 15px;
+	padding: 15px;
+}
+.mega-header-admin .mh-menu-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	user-select: none;
+}
+.mega-header-admin .mh-menu-header-main {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	min-width: 0;
+}
+.mega-header-admin .mh-menu-header h3 {
+	margin: 0;
+	display: flex;
+	align-items: center;
+	min-width: 0;
+}
+.mega-header-admin .mh-sort-handle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	border: 1px solid #ccd0d4;
+	border-radius: 3px;
+	background: #fff;
+	color: #646970;
+	cursor: move;
+	flex: 0 0 auto;
+}
+.mega-header-admin .mh-sort-handle:hover,
+.mega-header-admin .mh-sort-handle:focus {
+	border-color: #2271b1;
+	color: #2271b1;
+	outline: none;
+	box-shadow: 0 0 0 1px #2271b1;
+}
+.mega-header-admin .mh-menu-item.is-sorting,
+.mega-header-admin .mh-subitem.is-sorting {
+	background: #fff;
+	box-shadow: 0 6px 18px rgba(0,0,0,.12);
+}
+.mega-header-admin .mh-sort-placeholder {
+	border: 2px dashed #72aee6;
+	background: #f0f6fc;
+	margin-bottom: 15px;
+	box-sizing: border-box;
+}
+.mega-header-admin .mh-subitem-sort-placeholder {
+	margin-bottom: 5px;
+}
+.mega-header-admin .mh-accordion-icon {
+	transition: transform 0.3s ease;
+	margin-right: 5px;
+}
+.mega-header-admin .mh-menu-item.is-open .mh-accordion-icon {
+	transform: rotate(90deg);
+}
+.mega-header-admin .mh-subitems-container {
+	margin: 15px 0;
+}
+.mega-header-admin .mh-subitem {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	background: #fff;
+	border: 1px solid #eee;
+	padding: 10px;
+	margin-bottom: 5px;
+}
+.mega-header-admin .mh-subitem-image {
+	width: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
+}
+.mega-header-admin .mh-subitem-fields {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	flex-grow: 1;
+}
+.mega-header-admin .mh-subitem-fields input {
+	width: 100%;
+}
