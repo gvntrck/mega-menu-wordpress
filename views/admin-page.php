@@ -68,6 +68,48 @@
 					<span style="margin-left: 15px;">Cor ao passar o mouse (Hover):</span> <input type="color" id="menu_font_hover_color" value="#007bff" />
 					<br><br>
 					Tamanho da fonte: <input type="number" id="menu_font_size" style="width: 70px;" value="14" placeholder="14" /> px
+					<br><br>
+					<label for="menu_font_family" style="display:inline-block; min-width: 160px;">Família da Fonte (Google Fonts):</label>
+					<select id="menu_font_family" style="min-width: 220px;">
+						<option value="">— Padrão do tema —</option>
+						<?php
+						$google_fonts = array(
+							'Roboto', 'Open Sans', 'Lato', 'Montserrat', 'Poppins', 'Inter',
+							'Raleway', 'Oswald', 'Nunito', 'Nunito Sans', 'Merriweather',
+							'Playfair Display', 'Ubuntu', 'Work Sans', 'Mulish', 'Rubik',
+							'PT Sans', 'PT Serif', 'Source Sans 3', 'Source Serif 4',
+							'Noto Sans', 'Noto Serif', 'Quicksand', 'Barlow', 'Karla',
+							'DM Sans', 'DM Serif Display', 'Manrope', 'Fira Sans', 'Cabin',
+							'Heebo', 'Titillium Web', 'Bebas Neue', 'Archivo', 'Josefin Sans',
+							'Libre Franklin', 'Libre Baskerville', 'Hind', 'Anton', 'Dosis',
+							'Teko', 'Exo 2', 'Cairo', 'Arimo', 'Bitter', 'Crimson Text',
+							'Lora', 'EB Garamond', 'Zilla Slab', 'Space Grotesk', 'Space Mono',
+							'Figtree', 'Outfit', 'Plus Jakarta Sans', 'Urbanist', 'Be Vietnam Pro'
+						);
+						sort( $google_fonts );
+						foreach ( $google_fonts as $gf ) {
+							echo '<option value="' . esc_attr( $gf ) . '">' . esc_html( $gf ) . '</option>';
+						}
+						?>
+					</select>
+					<br><br>
+					<label for="menu_font_weight" style="display:inline-block; min-width: 160px;">Peso da Fonte:</label>
+					<select id="menu_font_weight" style="min-width: 120px;">
+						<option value="">Padrão</option>
+						<option value="100">100 - Thin</option>
+						<option value="200">200 - Extra Light</option>
+						<option value="300">300 - Light</option>
+						<option value="400">400 - Regular</option>
+						<option value="500">500 - Medium</option>
+						<option value="600">600 - Semi Bold</option>
+						<option value="700">700 - Bold</option>
+						<option value="800">800 - Extra Bold</option>
+						<option value="900">900 - Black</option>
+					</select>
+					<br><br>
+					<label for="menu_line_height" style="display:inline-block; min-width: 160px;">Altura da Linha (Line Height):</label>
+					<input type="number" id="menu_line_height" style="width: 90px;" min="0" step="0.1" value="" placeholder="1.5" />
+					<p class="description">Valor sem unidade (ex: 1.2, 1.5, 1.75). Deixe em branco para usar o padrão.</p>
 				</td>
 			</tr>
 			<tr>

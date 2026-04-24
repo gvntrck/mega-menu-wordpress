@@ -46,6 +46,17 @@ class Mega_Header_Frontend {
 		$menu_font_color = ! empty( $data['menu_font_color'] ) ? sanitize_hex_color( $data['menu_font_color'] ) : '#333333';
 		$menu_font_hover_color = ! empty( $data['menu_font_hover_color'] ) ? sanitize_hex_color( $data['menu_font_hover_color'] ) : '#007bff';
 		$menu_font_size = ! empty( $data['menu_font_size'] ) ? intval( $data['menu_font_size'] ) : 14;
+		$menu_font_family = ! empty( $data['menu_font_family'] ) ? sanitize_text_field( $data['menu_font_family'] ) : '';
+		$menu_font_weight = ! empty( $data['menu_font_weight'] ) ? preg_replace( '/[^0-9]/', '', $data['menu_font_weight'] ) : '';
+		$menu_line_height = isset( $data['menu_line_height'] ) && $data['menu_line_height'] !== '' ? floatval( $data['menu_line_height'] ) : '';
+
+		// Build Google Fonts URL if a family was selected
+		$google_font_url = '';
+		if ( $menu_font_family ) {
+			$family_param = str_replace( ' ', '+', $menu_font_family );
+			$weights = $menu_font_weight ? $menu_font_weight : '400;500;600;700';
+			$google_font_url = 'https://fonts.googleapis.com/css2?family=' . $family_param . ':wght@' . $weights . '&display=swap';
+		}
 		$header_shadow = ! empty( $data['header_shadow'] ) ? sanitize_text_field( $data['header_shadow'] ) : 'light';
 		$header_max_width = ! empty( $data['header_max_width'] ) ? intval( $data['header_max_width'] ) : '';
 		$subitem_image_width = ! empty( $data['subitem_image_width'] ) ? intval( $data['subitem_image_width'] ) : '';
@@ -73,6 +84,11 @@ class Mega_Header_Frontend {
 
 		ob_start();
 		?>
+		<?php if ( $google_font_url ) : ?>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="stylesheet" href="<?php echo esc_url( $google_font_url ); ?>">
+		<?php endif; ?>
 		<style>
 			:root {
 				--mh-height-fixed: <?php echo ( $logo_fixed_size + 40 ); ?>px;
@@ -93,7 +109,24 @@ class Mega_Header_Frontend {
 			.mh-menu-link {
 				color: <?php echo $menu_font_color; ?> !important;
 				font-size: <?php echo $menu_font_size; ?>px !important;
+				<?php if ( $menu_font_family ) : ?>
+				font-family: "<?php echo esc_attr( $menu_font_family ); ?>", sans-serif !important;
+				<?php endif; ?>
+				<?php if ( $menu_font_weight ) : ?>
+				font-weight: <?php echo intval( $menu_font_weight ); ?> !important;
+				<?php endif; ?>
+				<?php if ( $menu_line_height !== '' ) : ?>
+				line-height: <?php echo $menu_line_height; ?> !important;
+				<?php endif; ?>
 			}
+			<?php if ( $menu_font_family ) : ?>
+			.mh-mega-menu, .mh-product-title {
+				font-family: "<?php echo esc_attr( $menu_font_family ); ?>", sans-serif;
+				<?php if ( $menu_line_height !== '' ) : ?>
+				line-height: <?php echo $menu_line_height; ?>;
+				<?php endif; ?>
+			}
+			<?php endif; ?>
 			.mh-menu-link:hover {
 				color: <?php echo $menu_font_hover_color; ?> !important;
 			}

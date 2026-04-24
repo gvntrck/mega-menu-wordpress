@@ -121,6 +121,9 @@ jQuery(document).ready(function($) {
 		if (data.menu_font_color) $('#menu_font_color').val(data.menu_font_color);
 		if (data.menu_font_hover_color) $('#menu_font_hover_color').val(data.menu_font_hover_color);
 		if (data.menu_font_size) $('#menu_font_size').val(data.menu_font_size);
+		if (typeof data.menu_font_family !== 'undefined') $('#menu_font_family').val(data.menu_font_family);
+		if (typeof data.menu_font_weight !== 'undefined') $('#menu_font_weight').val(data.menu_font_weight);
+		if (typeof data.menu_line_height !== 'undefined') $('#menu_line_height').val(data.menu_line_height);
 		if (data.header_shadow) $('#header_shadow').val(data.header_shadow);
 		if (data.subitem_image_width) $('#subitem_image_width').val(data.subitem_image_width);
 		if (data.subitem_image_height) $('#subitem_image_height').val(data.subitem_image_height);
@@ -248,6 +251,9 @@ jQuery(document).ready(function($) {
 			menu_font_color: $('#menu_font_color').val(),
 			menu_font_hover_color: $('#menu_font_hover_color').val(),
 			menu_font_size: $('#menu_font_size').val(),
+			menu_font_family: $('#menu_font_family').val(),
+			menu_font_weight: $('#menu_font_weight').val(),
+			menu_line_height: $('#menu_line_height').val(),
 			header_shadow: $('#header_shadow').val(),
 			subitem_image_width: $('#subitem_image_width').val(),
 			subitem_image_height: $('#subitem_image_height').val(),

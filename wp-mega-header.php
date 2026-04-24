@@ -3,7 +3,7 @@
  * Plugin Name: Mega Header
  * Plugin URI:  https://projetoalfa.org
  * Description: Plugin para criar um cabeçalho fixo com Mega Menu e Carrossel (via Shortcode [mega_header]).
- * Version:     1.0.14
+ * Version:     1.0.15
  * Author:      Giovani Tureck
  * Author URI:  https://projetoalfa.org
  * Text Domain: mega-header
@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('MEGA_HEADER_VERSION', '1.0.14');
+define('MEGA_HEADER_VERSION', '1.0.15');
 define('MEGA_HEADER_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('MEGA_HEADER_PLUGIN_URL', plugin_dir_url(__FILE__));
 
