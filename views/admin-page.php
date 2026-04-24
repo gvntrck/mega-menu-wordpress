@@ -113,6 +113,44 @@
 				</td>
 			</tr>
 			<tr>
+				<th scope="row"><label>Texto dos Itens do Mega Menu</label></th>
+				<td>
+					<p class="description" style="margin-top:0;">Estilo do texto que aparece abaixo da imagem em cada item do Mega Menu.</p>
+					Cor da Fonte: <input type="color" id="subitem_font_color" value="#333333" />
+					<span style="margin-left: 15px;">Cor ao passar o mouse (Hover):</span> <input type="color" id="subitem_font_hover_color" value="#007bff" />
+					<br><br>
+					Tamanho da fonte: <input type="number" id="subitem_font_size" style="width: 70px;" value="" placeholder="14" /> px
+					<br><br>
+					<label for="subitem_font_family" style="display:inline-block; min-width: 160px;">Família da Fonte (Google Fonts):</label>
+					<select id="subitem_font_family" style="min-width: 220px;">
+						<option value="">— Padrão do tema —</option>
+						<?php
+						foreach ( $google_fonts as $gf ) {
+							echo '<option value="' . esc_attr( $gf ) . '">' . esc_html( $gf ) . '</option>';
+						}
+						?>
+					</select>
+					<br><br>
+					<label for="subitem_font_weight" style="display:inline-block; min-width: 160px;">Peso da Fonte:</label>
+					<select id="subitem_font_weight" style="min-width: 120px;">
+						<option value="">Padrão</option>
+						<option value="100">100 - Thin</option>
+						<option value="200">200 - Extra Light</option>
+						<option value="300">300 - Light</option>
+						<option value="400">400 - Regular</option>
+						<option value="500">500 - Medium</option>
+						<option value="600">600 - Semi Bold</option>
+						<option value="700">700 - Bold</option>
+						<option value="800">800 - Extra Bold</option>
+						<option value="900">900 - Black</option>
+					</select>
+					<br><br>
+					<label for="subitem_line_height" style="display:inline-block; min-width: 160px;">Altura da Linha (Line Height):</label>
+					<input type="number" id="subitem_line_height" style="width: 90px;" min="0" step="0.1" value="" placeholder="1.5" />
+					<p class="description">Valor sem unidade (ex: 1.2, 1.5, 1.75). Deixe em branco para usar o padrão.</p>
+				</td>
+			</tr>
+			<tr>
 				<th scope="row"><label>Sombra do Cabeçalho</label></th>
 				<td>
 					<select id="header_shadow">

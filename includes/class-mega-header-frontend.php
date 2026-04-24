@@ -50,12 +50,41 @@ class Mega_Header_Frontend {
 		$menu_font_weight = ! empty( $data['menu_font_weight'] ) ? preg_replace( '/[^0-9]/', '', $data['menu_font_weight'] ) : '';
 		$menu_line_height = isset( $data['menu_line_height'] ) && $data['menu_line_height'] !== '' ? floatval( $data['menu_line_height'] ) : '';
 
-		// Build Google Fonts URL if a family was selected
-		$google_font_url = '';
+		// Subitem (mega menu item text) typography
+		$subitem_font_color = ! empty( $data['subitem_font_color'] ) ? sanitize_hex_color( $data['subitem_font_color'] ) : '';
+		$subitem_font_hover_color = ! empty( $data['subitem_font_hover_color'] ) ? sanitize_hex_color( $data['subitem_font_hover_color'] ) : '';
+		$subitem_font_size = ! empty( $data['subitem_font_size'] ) ? intval( $data['subitem_font_size'] ) : '';
+		$subitem_font_family = ! empty( $data['subitem_font_family'] ) ? sanitize_text_field( $data['subitem_font_family'] ) : '';
+		$subitem_font_weight = ! empty( $data['subitem_font_weight'] ) ? preg_replace( '/[^0-9]/', '', $data['subitem_font_weight'] ) : '';
+		$subitem_line_height = isset( $data['subitem_line_height'] ) && $data['subitem_line_height'] !== '' ? floatval( $data['subitem_line_height'] ) : '';
+
+		// Build Google Fonts URL combining both families (menu + subitem)
+		$font_families = array();
 		if ( $menu_font_family ) {
-			$family_param = str_replace( ' ', '+', $menu_font_family );
-			$weights = $menu_font_weight ? $menu_font_weight : '400;500;600;700';
-			$google_font_url = 'https://fonts.googleapis.com/css2?family=' . $family_param . ':wght@' . $weights . '&display=swap';
+			$font_families[ $menu_font_family ] = $menu_font_weight ? $menu_font_weight : '400;500;600;700';
+		}
+		if ( $subitem_font_family ) {
+			if ( isset( $font_families[ $subitem_font_family ] ) ) {
+				// Merge weights
+				$existing = explode( ';', $font_families[ $subitem_font_family ] );
+				if ( $subitem_font_weight ) {
+					$existing[] = $subitem_font_weight;
+				}
+				$existing = array_unique( array_filter( $existing ) );
+				sort( $existing );
+				$font_families[ $subitem_font_family ] = implode( ';', $existing );
+			} else {
+				$font_families[ $subitem_font_family ] = $subitem_font_weight ? $subitem_font_weight : '400;500;600;700';
+			}
+		}
+
+		$google_font_url = '';
+		if ( ! empty( $font_families ) ) {
+			$parts = array();
+			foreach ( $font_families as $family => $weights ) {
+				$parts[] = 'family=' . str_replace( ' ', '+', $family ) . ':wght@' . $weights;
+			}
+			$google_font_url = 'https://fonts.googleapis.com/css2?' . implode( '&', $parts ) . '&display=swap';
 		}
 		$header_shadow = ! empty( $data['header_shadow'] ) ? sanitize_text_field( $data['header_shadow'] ) : 'light';
 		$header_max_width = ! empty( $data['header_max_width'] ) ? intval( $data['header_max_width'] ) : '';
@@ -119,17 +148,32 @@ class Mega_Header_Frontend {
 				line-height: <?php echo $menu_line_height; ?> !important;
 				<?php endif; ?>
 			}
-			<?php if ( $menu_font_family ) : ?>
-			.mh-mega-menu, .mh-product-title {
-				font-family: "<?php echo esc_attr( $menu_font_family ); ?>", sans-serif;
-				<?php if ( $menu_line_height !== '' ) : ?>
-				line-height: <?php echo $menu_line_height; ?>;
-				<?php endif; ?>
-			}
-			<?php endif; ?>
 			.mh-menu-link:hover {
 				color: <?php echo $menu_font_hover_color; ?> !important;
 			}
+			.mh-product-title {
+				<?php if ( $subitem_font_color ) : ?>
+				color: <?php echo $subitem_font_color; ?> !important;
+				<?php endif; ?>
+				<?php if ( $subitem_font_size ) : ?>
+				font-size: <?php echo $subitem_font_size; ?>px !important;
+				<?php endif; ?>
+				<?php if ( $subitem_font_family ) : ?>
+				font-family: "<?php echo esc_attr( $subitem_font_family ); ?>", sans-serif !important;
+				<?php endif; ?>
+				<?php if ( $subitem_font_weight ) : ?>
+				font-weight: <?php echo intval( $subitem_font_weight ); ?> !important;
+				<?php endif; ?>
+				<?php if ( $subitem_line_height !== '' ) : ?>
+				line-height: <?php echo $subitem_line_height; ?> !important;
+				<?php endif; ?>
+			}
+			<?php if ( $subitem_font_hover_color ) : ?>
+			.mh-product-card a:hover .mh-product-title,
+			.swiper-slide.mh-product-card:hover .mh-product-title {
+				color: <?php echo $subitem_font_hover_color; ?> !important;
+			}
+			<?php endif; ?>
 			<?php if ( $subitem_image_width || $subitem_image_height ) : ?>
 			.mh-img-wrapper {
 				<?php if ( $subitem_image_height ) : ?>
